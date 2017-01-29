@@ -19,17 +19,6 @@ connection.connect(function(err) {
   // console.log("connected as id " + connection.threadId);
 });
 
-//function to show list of item
-var availableItems = function() {
-      connection.query('select * from products', function(err, res) {
-      if (err) throw err;
-      console.table(res);
-    });
-} 
-
-availableItems();
-
-
 var ask = function() {
       inquirer.prompt([   
             {           
@@ -47,8 +36,19 @@ var ask = function() {
       });
 }
 
-ask();
+//function to show list of item
+var availableItems = function() {
+      connection.query('select * from products', function(err, res) {
+      if (err) throw err;
+      console.table(res);
+      ask();
+    });
+} 
 
+availableItems();
+
+
+//function to run the transaction
 var transaction = function() {
 
       inquirer.prompt([
