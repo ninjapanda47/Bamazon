@@ -19,7 +19,6 @@ connection.connect(function(err) {
   // console.log("connected as id " + connection.threadId);
 });
 
-
 //function to show list of item
 var availableItems = function() {
       connection.query('select * from products', function(err, res) {
@@ -28,42 +27,66 @@ var availableItems = function() {
     });
 } 
 
-inquirer.prompt([
-	     {
-        name: "id",
-        message: "Enter the id of the item you would like to buy."
-      }, {
-        name: "quantity",
-        message: "Enter the quantity."
-      }, 
+availableItems();
 
-	]).then(function (answers) {
-     id = answers.id;
-     quantity = answers.quantity;
-     // console.log(id+ " " + quantity);
 
-  connection.query("select stock_quantity, price from products where ?", { item_id: id }, function(err, res) {
-  if (err) throw err;
+var ask = function() {
+      inquirer.prompt([   
+            {           
+              type: "confirm",
+              name: "buy",
+              message: "Do you want to purchase an item?"
+              }
+              ]).then(function (answers) {
+                if (answers.buy === true){
+                  transaction();
+                }
+                else {
+                  console.log("Maybe next time!");
+                }
+      });
+}
 
-      var stock_quantity = res[0].stock_quantity;
-      var price = res[0].price;
-      // console.log(stock_quantity + " " + price);
+ask();
 
-    if (stock_quantity < quantity) {
-      console.log("Insufficient quantity!");
-    }
-      else {
-        newQuantity = stock_quantity - quantity; 
-        connection.query("update products set ? where ?", [{stock_quantity: newQuantity}, {item_id: id}], function(err, res) {
-         if (err) throw err;
-         showTotal(quantity, price);
- 
-        });
-      }
-    });
+var transaction = function() {
 
-});
+      inquirer.prompt([
+      	     {
+              name: "id",
+              message: "Enter the id of the item you would like to buy."
+            }, {
+              name: "quantity",
+              message: "Enter the quantity."
+            }, 
 
+      	]).then(function (answers) {
+           id = answers.id;
+           quantity = answers.quantity;
+           // console.log(id+ " " + quantity);
+
+        connection.query("select stock_quantity, price from products where ?", { item_id: id }, function(err, res) {
+        if (err) throw err;
+
+            var stock_quantity = res[0].stock_quantity;
+            var price = res[0].price;
+            // console.log(stock_quantity + " " + price);
+
+          if (stock_quantity < quantity) {
+            console.log("Insufficient quantity!");
+          }
+            else {
+              newQuantity = stock_quantity - quantity; 
+              connection.query("update products set ? where ?", [{stock_quantity: newQuantity}, {item_id: id}], function(err, res) {
+               if (err) throw err;
+               showTotal(quantity, price);
+       
+              });
+            }
+          });
+
+      });
+}//end of transaction
 
 var showTotal = function(quantity, price) {
   var total = quantity * price;
