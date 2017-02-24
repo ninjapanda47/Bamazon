@@ -116,5 +116,5 @@ Make sure you save and require the MySQL and Prompt npm packages in your homewor
 	* **HINT**: There may be an NPM package that can log the table to the console. What's is it? Good question :)
 
 ### Technology used
-- nodeJS
+- NodeJS
 - MySql
