@@ -1,18 +1,15 @@
 # Bamazon
 
-This is the 11th assignment for the UT Coding Boot Camp.
+This is the 11th assignment for the UT Coding Boot Camp.  Links to the videos of the completed work below.
+
+https://drive.google.com/open?id=0B2hgnH0ha5tJRU14VWpXOTg2cE0
+https://drive.google.com/open?id=0B2hgnH0ha5tJNmw0LUdLTlEtY1E
 
 ### Overview
 
 In this activity, you'll be creating an Amazon-like storefront with the MySQL skills you learned this week. The app will take in orders from customers and deplete stock from the store's inventory. As a bonus task, you can program your app to track product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
 
 Make sure you save and require the MySQL and Prompt npm packages in your homework files--your app will need them for data input and storage.
-
-### Submission Guide
-
-Make sure you use the normal GitHub and Heroku process. This time, though, you need to include screenshots and/or a video showing us that you got the app working with no bugs. You can include these screenshots or a link to a video in a `README.md` file.
-
-If you haven't written a markdown file yet, [click here for a rundown](https://guides.github.com/features/mastering-markdown/), or just take a look at the raw file of these instructions.
 
 #### Instructions:
 
